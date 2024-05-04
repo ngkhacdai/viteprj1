@@ -1,0 +1,10 @@
+.card-statical {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentstatical {
+  display: flex;
+  justify-content: space-between;
+  height: 600px;
+}/*# sourceMappingURL=statical.css.map */

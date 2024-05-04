@@ -1,0 +1,22 @@
+.logo-sidebar {
+  width: 60%;
+}
+
+.sidebar-header {
+  text-align: center;
+}
+
+.btn-nav {
+  background-color: white;
+  height: 20px;
+  font-size: 20px;
+  border: 0;
+  text-align: right;
+  cursor: pointer;
+}
+
+.btn-header {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}/*# sourceMappingURL=sidebar.css.map */
