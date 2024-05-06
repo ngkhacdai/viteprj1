@@ -57,11 +57,11 @@ const OrderChart = () => {
   };
 
   return (
-    <>
+    <div>
       {chartData ? (
         <Chart
           chartType="LineChart"
-          width="100%"
+          // width="100%"
           height="400px"
           data={chartData}
           options={options}
@@ -70,7 +70,7 @@ const OrderChart = () => {
       ) : (
         <div>Loading Chart...</div>
       )}
-    </>
+    </div>
   );
 };
 
