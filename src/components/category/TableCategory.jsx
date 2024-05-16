@@ -85,7 +85,7 @@ const TableCategory = () => {
   };
   return (
     <div>
-      <Table columns={colunms} dataSource={data} />
+      <Table columns={colunms} dataSource={data} scroll={{ x: 500 }} />
     </div>
   );
 };

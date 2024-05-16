@@ -14,6 +14,7 @@ import Login from "./components/login/Login.jsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.jsx";
 import "react-toastify/dist/ReactToastify.css";
+import ProductDetail from "./components/product/ProductDetail.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -23,7 +24,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/" element={<App />}>
             <Route path="/" element={<Statical />} />
             <Route path="/category" element={<Category />} />
-            <Route path="/product" element={<Product />} />
+            <Route path="/product" element={<Product />}>
+              <Route path="/product" element={<Product />} />
+              <Route path="/product/:product" element={<ProductDetail />} />
+            </Route>
             <Route path="/store" element={<Store />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/discount" element={<Discount />} />

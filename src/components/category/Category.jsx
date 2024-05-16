@@ -27,12 +27,7 @@ const Category = () => {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="loading-container">
-        <Button onClick={showLoader}>Show fullscreen for 3s</Button>
-        <Spin spinning={spinning} fullscreen />
-      </div>
-    );
+    return <Spin fullscreen />;
   }
   if (isError) {
     return <div>Something went wrong</div>;

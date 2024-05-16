@@ -41,6 +41,9 @@ const BodyStatical = () => {
         className="table-statical"
         dataSource={data.topProductSold}
         columns={columns}
+        style={{
+          width: "100%",
+        }}
       />
     </div>
   );

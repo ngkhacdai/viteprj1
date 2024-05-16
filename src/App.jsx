@@ -3,7 +3,7 @@ import SideBar from "./components/sidebar/SideBar";
 import { useEffect, useState } from "react";
 import "./css/app/App.css";
 import avatar from "./assets/avatar.jpg";
-import { TbLogout } from "react-icons/tb";
+import { Button, Dropdown, Row } from "antd";
 const App = () => {
   const [tiltle, setTitle] = useState("");
   const location = useLocation();
@@ -46,29 +46,33 @@ const App = () => {
     localStorage.setItem("userID", "");
     navigate("/login");
   };
+  const items = [
+    {
+      key: "1",
+      label: <div onClick={logOutHandle}>Đăng xuất</div>,
+    },
+  ];
   return (
     <>
-      <div style={{ display: "flex", height: "100vh" }}>
-        <SideBar />
-        <div className="container" style={{ flex: 1 }}>
-          <div className="header-container">
-            <h2>{tiltle}</h2>
+      <SideBar />
+      {/* <div className="header-container">
+            <h3>{tiltle}</h3>
+
             <div className="infor-header">
-              <img src={avatar} alt="" />
-              <div>
-                <p>Admin</p>
-                <p>Nguyễn Khắc Đại</p>
-              </div>
-              <button onClick={logOutHandle}>
-                <TbLogout />
-              </button>
+              <img src={avatar} className="img-header" alt="" />
+              <Dropdown
+                menu={{
+                  items,
+                }}
+                placement="bottomRight"
+                arrow
+              >
+                <Button style={{ fontSize: "15px", color: "black" }}>
+                  Nguyễn Khắc Đại
+                </Button>
+              </Dropdown>
             </div>
-          </div>
-          <div className="content-container">
-            <Outlet />
-          </div>
-        </div>
-      </div>
+          </div> */}
     </>
   );
 };

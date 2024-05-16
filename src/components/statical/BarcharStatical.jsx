@@ -66,7 +66,7 @@ const BarcharStatical = () => {
       {chartData ? (
         <>
           <div className="barcharStatical">
-            <div>
+            <div className="select-year">
               <label htmlFor="year-select">Select Year: </label>
               <select
                 id="year-select"
@@ -84,8 +84,7 @@ const BarcharStatical = () => {
             <div>
               <Chart
                 chartType="ColumnChart"
-                width="600px"
-                height="600px"
+                height="500px"
                 data={chartData}
                 loader={<div>Loading Chart...</div>}
               />

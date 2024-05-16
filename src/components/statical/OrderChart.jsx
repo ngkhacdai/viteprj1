@@ -61,7 +61,7 @@ const OrderChart = () => {
       {chartData ? (
         <Chart
           chartType="LineChart"
-          // width="100%"
+          width="100%"
           height="400px"
           data={chartData}
           options={options}

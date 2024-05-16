@@ -4,6 +4,11 @@
   height: 80px;
   align-items: center;
   padding: 0 20px;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: white;
+  opacity: 0.8;
 }
 
 .infor-header {
@@ -11,22 +16,22 @@
   align-items: center;
 }
 
-.header-container img {
-  width: 60px;
-  height: 60px;
+.img-header {
+  width: 40px;
+  height: 40px;
   border: 1px solid;
-  border-radius: 60px;
+  border-radius: 40px;
 }
 
 .header-container div {
   margin: 0 10px;
 }
 
-.header-container button {
+.infor-header button {
   background-color: white;
   color: red;
   border: 0 solid;
-  font-size: 35px;
+  font-size: 28px;
   cursor: pointer;
 }
 
@@ -36,4 +41,10 @@
 
 .container {
   max-width: 100vw;
+}
+
+.sticky-sidebar {
+  position: "fixed";
+  top: 0;
+  z-index: 1;
 }/*# sourceMappingURL=App.css.map */

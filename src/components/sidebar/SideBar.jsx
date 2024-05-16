@@ -1,76 +1,99 @@
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
-import logo from "../../assets/trustybuy.png";
 import "../../css/sidebar/sidebar.css";
-import { NavLink } from "react-router-dom";
-import { MdDashboardCustomize } from "react-icons/md";
-import { MdCategory } from "react-icons/md";
-import { MdOutlineProductionQuantityLimits } from "react-icons/md";
-import { CiShop } from "react-icons/ci";
-import { AiTwotoneCustomerService } from "react-icons/ai";
-import { MdOutlineDiscount } from "react-icons/md";
-import { PiList } from "react-icons/pi";
 import { useState } from "react";
+import { Button, Layout, Menu, theme } from "antd";
+import {
+  HomeOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
+import { NavLink, Outlet } from "react-router-dom/dist";
+import {
+  MdCategory,
+  MdDiscount,
+  MdOutlineProductionQuantityLimits,
+} from "react-icons/md";
+import { FaStore } from "react-icons/fa";
+import { IoPeopleCircleOutline } from "react-icons/io5";
+const { Header, Sider, Content } = Layout;
 
 const SideBar = () => {
   const [collap, setCollap] = useState(true);
-  const showSideBar = () => {
-    setCollap(!collap);
-  };
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
   return (
-    <Sidebar collapsed={collap}>
-      <div className="btn-header">
-        <button onClick={showSideBar} className="btn-nav">
-          <PiList />
-        </button>
-      </div>
-      <div className="sidebar-header">
-        <img className="logo-sidebar" src={logo} alt="" />
-      </div>
-      <Menu
-        menuItemStyles={{
-          button: {
-            [`&.active`]: {
-              backgroundColor: "#13395e",
-              color: "#b6c8d9",
+    <Layout>
+      <Sider trigger={null} collapsible collapsed={collap}>
+        <div className="demo-logo-vertical" />
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["1"]}
+          items={[
+            {
+              key: "1",
+              icon: <HomeOutlined />,
+              label: <NavLink to={"/"}>Home</NavLink>,
             },
-          },
-        }}
-      >
-        <MenuItem
-          icon={<MdDashboardCustomize />}
-          component={<NavLink to={"/"} />}
+            {
+              key: "2",
+              icon: <MdCategory />,
+              label: <NavLink to={"/category"}>Category</NavLink>,
+            },
+            {
+              key: "3",
+              icon: <MdOutlineProductionQuantityLimits />,
+              label: <NavLink to={"/product"}>Product</NavLink>,
+            },
+            {
+              key: "4",
+              icon: <FaStore />,
+              label: <NavLink to={"/store"}>Store</NavLink>,
+            },
+            {
+              key: "5",
+              icon: <IoPeopleCircleOutline />,
+              label: <NavLink to={"/customer"}>Customer</NavLink>,
+            },
+            {
+              key: "6",
+              icon: <MdDiscount />,
+              label: <NavLink to={"/discount"}>Discount</NavLink>,
+            },
+          ]}
+        />
+      </Sider>
+      <Layout>
+        <Header
+          style={{
+            padding: 0,
+            background: colorBgContainer,
+          }}
         >
-          Thống kê
-        </MenuItem>
-        <MenuItem
-          icon={<MdCategory />}
-          component={<NavLink to={"/category"} />}
+          <Button
+            type="text"
+            icon={collap ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollap(!collap)}
+            style={{
+              fontSize: "16px",
+              width: 64,
+              height: 64,
+            }}
+          />
+        </Header>
+        <Content
+          style={{
+            padding: 24,
+            minHeight: "100vh",
+            width: "100%",
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+          }}
         >
-          Danh mục
-        </MenuItem>
-        <MenuItem
-          icon={<MdOutlineProductionQuantityLimits />}
-          component={<NavLink to={"/product"} />}
-        >
-          Sản phẩm
-        </MenuItem>
-        <MenuItem icon={<CiShop />} component={<NavLink to={"/store"} />}>
-          Cửa hàng
-        </MenuItem>
-        <MenuItem
-          icon={<AiTwotoneCustomerService />}
-          component={<NavLink to={"/customer"} />}
-        >
-          Khách hàng
-        </MenuItem>
-        <MenuItem
-          icon={<MdOutlineDiscount />}
-          component={<NavLink to={"/discount"} />}
-        >
-          Giảm giá
-        </MenuItem>
-      </Menu>
-    </Sidebar>
+          <Outlet />
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
