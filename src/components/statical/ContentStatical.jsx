@@ -10,10 +10,10 @@ const ContentStatical = () => {
         <Col className="gutter-row" xs={24} sm={24} md={24} lg={24} xl={12}>
           <BodyStatical />
         </Col>
-        <Col className="gutter-row" xs={20} sm={22} md={22} lg={22} xl={12}>
+        <Col className="gutter-row" xs={24} sm={22} md={22} lg={22} xl={10}>
           <BarChartStatical />
         </Col>
-        <Col className="gutter-row" xs={20} sm={22} md={22} lg={22} xl={12}>
+        <Col className="gutter-row" xs={24} sm={22} md={22} lg={22} xl={12}>
           <OrderChart />
         </Col>
       </Row>

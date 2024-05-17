@@ -63,7 +63,7 @@ const TableProduct = ({ product }) => {
   ];
 
   const viewDetail = (product) => {
-    navigate(`/productdetail?${product.product_name}`, { state: { product } });
+    navigate(`/productdetail?${product.product_slug}&id=${product._id}`);
   };
 
   return (

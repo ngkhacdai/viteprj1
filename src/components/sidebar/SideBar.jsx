@@ -88,7 +88,6 @@ const SideBar = () => {
         </Header>
         <Content
           style={{
-            padding: 24,
             minHeight: "100vh",
             width: "100%",
             background: colorBgContainer,

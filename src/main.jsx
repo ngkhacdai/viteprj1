@@ -15,6 +15,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import ProductDetail from "./components/product/ProductDetail.jsx";
+import StoreDetail from "./components/store/StoreDetail.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/product" element={<Product />} />
             <Route path="/productdetail" element={<ProductDetail />} />
             <Route path="/store" element={<Store />} />
+            <Route path="/storedetail" element={<StoreDetail />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/discount" element={<Discount />} />
             <Route path="/order" element={<Order />} />

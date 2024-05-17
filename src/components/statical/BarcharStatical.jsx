@@ -67,13 +67,12 @@ const BarcharStatical = () => {
         <>
           <div className="barcharStatical">
             <div className="select-year">
-              <label htmlFor="year-select">Select Year: </label>
               <select
                 id="year-select"
                 value={selectedYear}
                 onChange={handleYearChange}
               >
-                <option value="">-- Select Year --</option>
+                <option value="">Select Year</option>
                 {Object.keys(data.mergedData).map((year) => (
                   <option key={year} value={year}>
                     {year}

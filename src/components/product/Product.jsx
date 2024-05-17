@@ -20,7 +20,6 @@ const Product = () => {
   }
   return (
     <div>
-      <p></p>
       <TableProduct product={product} />
     </div>
   );

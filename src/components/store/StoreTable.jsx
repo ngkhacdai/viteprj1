@@ -1,8 +1,11 @@
 import { Table } from "antd/es";
 import { API } from "../../service/customAxios";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const StoreTable = ({ storeData }) => {
+  const navigate = useNavigate();
+
   const columns = [
     {
       title: "STT",
@@ -28,7 +31,9 @@ const StoreTable = ({ storeData }) => {
     },
     {
       title: "Số điện thoại",
-      dataIndex: "phoneNumberShop",
+      render: (record) => {
+        return <p>0{record.phoneNumberShop}</p>;
+      },
     },
     {
       title: "Địa chỉ",
@@ -44,14 +49,23 @@ const StoreTable = ({ storeData }) => {
       title: "Hành động",
       render: (record) => {
         return (
-          <Button variant="contained" color="success" size="small">
+          <Button
+            onClick={() => {
+              viewDetailHandle(record);
+            }}
+            variant="contained"
+            color="success"
+            size="small"
+          >
             Xem chi tiết
           </Button>
         );
       },
     },
   ];
-
+  const viewDetailHandle = (record) => {
+    navigate(`/storedetail?${record.nameShop}&id=${record._id}`);
+  };
   return (
     <div>
       <Table columns={columns} scroll={{ x: 500 }} dataSource={storeData} />
