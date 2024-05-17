@@ -12,7 +12,7 @@ import {
   MdDiscount,
   MdOutlineProductionQuantityLimits,
 } from "react-icons/md";
-import { FaStore } from "react-icons/fa";
+import { FaRegMoneyBillAlt, FaStore } from "react-icons/fa";
 import { IoPeopleCircleOutline } from "react-icons/io5";
 const { Header, Sider, Content } = Layout;
 
@@ -59,6 +59,11 @@ const SideBar = () => {
               key: "6",
               icon: <MdDiscount />,
               label: <NavLink to={"/discount"}>Discount</NavLink>,
+            },
+            {
+              key: "7",
+              icon: <FaRegMoneyBillAlt />,
+              label: <NavLink to={"/order"}>Order</NavLink>,
             },
           ]}
         />

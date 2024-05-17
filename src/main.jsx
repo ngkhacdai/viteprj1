@@ -24,10 +24,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/" element={<App />}>
             <Route path="/" element={<Statical />} />
             <Route path="/category" element={<Category />} />
-            <Route path="/product" element={<Product />}>
-              <Route path="/product" element={<Product />} />
-              <Route path="/product/:product" element={<ProductDetail />} />
-            </Route>
+            <Route path="/product" element={<Product />} />
+            <Route path="/productdetail" element={<ProductDetail />} />
             <Route path="/store" element={<Store />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/discount" element={<Discount />} />

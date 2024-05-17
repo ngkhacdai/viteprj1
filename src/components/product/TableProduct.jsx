@@ -1,28 +1,25 @@
 import { API } from "../../service/customAxios";
 import { Button } from "@mui/material";
 import { Table } from "antd/es";
-import { useNavigate } from "react-router-dom/dist";
+import { useNavigate } from "react-router-dom";
+
 const TableProduct = ({ product }) => {
   const navigate = useNavigate();
 
   const columns = [
     {
       title: "STT",
-      render: (record, text, index) => {
-        return index + 1;
-      },
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Ảnh",
-      render: (record) => {
-        return (
-          <img
-            src={`${API}/uploads/${record.product_thumb[0]}`}
-            className="w-16 h-16"
-            alt=""
-          />
-        );
-      },
+      render: (record) => (
+        <img
+          src={`${API}/uploads/${record.product_thumb[0]}`}
+          className="w-16 h-16"
+          alt=""
+        />
+      ),
     },
     {
       title: "Tên sản phẩm",
@@ -30,12 +27,11 @@ const TableProduct = ({ product }) => {
     },
     {
       title: "Giá sản phẩm",
-      render: (record) => {
-        return record.product_price.toLocaleString("en-US", {
+      render: (record) =>
+        record.product_price.toLocaleString("en-US", {
           style: "currency",
           currency: "VND",
-        });
-      },
+        }),
     },
     {
       title: "Số lượng",
@@ -47,31 +43,29 @@ const TableProduct = ({ product }) => {
     },
     {
       title: "Trạng thái",
-      render: (record) => {
-        return <div>{record.isPublished ? <p>Hiển thị</p> : <p>Ẩn</p>}</div>;
-      },
+      render: (record) => (
+        <div>{record.isPublished ? <p>Hiển thị</p> : <p>Ẩn</p>}</div>
+      ),
     },
     {
       title: "Hành động",
-      render: () => {
-        return (
-          <Button
-            onClick={() => {
-              viewDetail();
-            }}
-            variant="contained"
-            color="success"
-            size="small"
-          >
-            Xem chi tiết
-          </Button>
-        );
-      },
+      render: (record) => (
+        <Button
+          onClick={() => viewDetail(record)}
+          variant="contained"
+          color="success"
+          size="small"
+        >
+          Xem chi tiết
+        </Button>
+      ),
     },
   ];
-  const viewDetail = () => {
-    navigate("/product");
+
+  const viewDetail = (product) => {
+    navigate(`/productdetail?${product.product_name}`, { state: { product } });
   };
+
   return (
     <div>
       <Table columns={columns} scroll={{ x: 500 }} dataSource={product} />

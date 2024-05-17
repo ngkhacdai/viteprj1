@@ -54,7 +54,9 @@ const App = () => {
   ];
   return (
     <>
-      <SideBar />
+      <div className="sticky top-0 left-0">
+        <SideBar />
+      </div>
       {/* <div className="header-container">
             <h3>{tiltle}</h3>
 
