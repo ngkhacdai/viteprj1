@@ -1,4 +1,4 @@
-import { Table } from "antd/es";
+import { Table, Tag } from "antd/es";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 const TableOrder = ({ orderData }) => {
@@ -53,21 +53,21 @@ const TableOrder = ({ orderData }) => {
       title: "Trạng thái",
       render: (record) => {
         return (
-          <div
-            className={
+          <Tag
+            color={
               record.order_status === "pending"
-                ? "text-yellow-600"
+                ? "#FFD700"
                 : record.order_status === "comfirmed"
-                ? "text-green-600"
+                ? "#87d068"
                 : record.order_status === "delivered"
-                ? "text-green-600"
+                ? "#87d068"
                 : record.order_status === "cancelled"
-                ? "text-red-600"
-                : record.order_status === "shipped" && "text-green-600"
+                ? "#f50"
+                : record.order_status === "shipped" && "#87d068"
             }
           >
             {checkStatus(record.order_status)}
-          </div>
+          </Tag>
         );
       },
     },

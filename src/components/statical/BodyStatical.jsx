@@ -41,6 +41,7 @@ const BodyStatical = () => {
         className="table-statical mt-2"
         dataSource={data.topProductSold}
         columns={columns}
+        scroll={{ x: 400 }}
         style={{
           width: "100%",
         }}

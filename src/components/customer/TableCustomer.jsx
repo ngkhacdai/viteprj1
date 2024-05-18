@@ -68,7 +68,9 @@ const TableCustomer = ({ customerData }) => {
     },
   ];
   const viewDetailHandle = (record) => {
-    navigate(`/customerdetail?${record.information.fullName}&id=${record._id}`);
+    navigate(
+      `/customerdetail?${record.information?.fullName}&id=${record._id}`
+    );
   };
   return (
     <div>

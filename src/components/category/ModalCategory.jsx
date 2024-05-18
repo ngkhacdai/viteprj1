@@ -1,5 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Image, Input, Modal, Upload } from "antd";
+import { Form, Image, Input, Modal, Upload, notification } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   closeModal,
@@ -20,6 +20,13 @@ const ModalCategory = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
+  const [api, contextHolder] = notification.useNotification();
+  const openNotificationWithIcon = (content) => {
+    api["error"]({
+      message: "Notification Title",
+      description: content,
+    });
+  };
   useEffect(() => {
     if (titleModal === "Sửa danh mục") {
       setFileList([
@@ -73,6 +80,8 @@ const ModalCategory = () => {
     </button>
   );
   const onSubmitHandle = async () => {
+    if (!categoryName || fileList.length === 0)
+      return openNotificationWithIcon("Hãy điền đầy đủ thông tin");
     const formData = new FormData();
 
     formData.append("category_name", categoryName);
@@ -100,16 +109,12 @@ const ModalCategory = () => {
         formData.append("id_category", id_category);
         await updateCategory(formData);
       } else {
-        console.log(fileList[0]);
-        await fetch("http://localhost:5173/src/assets/avatar.jpg", {
-          mode: "no-cors",
-        })
+        console.log("fileList", fileList[0]);
+        await fetch(fileList[0].url)
           .then((res) => {
-            console.log("blog", res);
             return res.blob();
           })
           .then((blob) => {
-            console.log("blog2", blob);
             console.log(
               new File([blob], "Filename.png", { type: "image/png" })
             );
@@ -126,47 +131,61 @@ const ModalCategory = () => {
       }
     }
 
-    await dispatch(fetchGetAllCategory());
+    dispatch(fetchGetAllCategory());
     onCloseModal();
   };
 
   return (
     <div>
+      {contextHolder}
       <Modal
         title={titleModal}
         open={isShowModal}
         onOk={onSubmitHandle}
         onCancel={() => onCloseModal()}
       >
-        <Upload
-          listType="picture-circle"
-          fileList={fileList}
-          onPreview={handlePreview}
-          onChange={handleChange}
-        >
-          {fileList.length >= 1 ? null : uploadButton}
-        </Upload>
-        {previewImage && (
-          <Image
-            wrapperStyle={{
-              display: "none",
-            }}
-            preview={{
-              visible: previewOpen,
-              onVisibleChange: (visible) => setPreviewOpen(visible),
-              afterOpenChange: (visible) => !visible && setPreviewImage(""),
-            }}
-            src={previewImage}
-          />
-        )}
-        <div>
-          <p>Tên danh mục</p>
-          <Input
-            placeholder="Tên danh mục"
-            value={categoryName}
-            onChange={(e) => dispatch(changeInputName(e.target.value))}
-          />
-        </div>
+        <Form layout="vertical">
+          <Form.Item name="avatar">
+            <Upload
+              listType="picture-circle"
+              fileList={fileList}
+              onPreview={handlePreview}
+              onChange={handleChange}
+              accept="image/png, image/jpeg, image/jpg"
+              beforeUpload={() => false}
+            >
+              {fileList.length >= 1 ? null : uploadButton}
+            </Upload>
+            {previewImage && (
+              <Image
+                wrapperStyle={{
+                  display: "none",
+                }}
+                preview={{
+                  visible: previewOpen,
+                  onVisibleChange: (visible) => setPreviewOpen(visible),
+                  afterOpenChange: (visible) => !visible && setPreviewImage(""),
+                }}
+                src={previewImage}
+              />
+            )}
+          </Form.Item>
+          <Form.Item
+            rules={[
+              {
+                required: true,
+                message: "Hãy điền đầy đủ thông tin",
+              },
+            ]}
+            label="Tên danh mục"
+          >
+            <Input
+              placeholder="Tên danh mục"
+              value={categoryName}
+              onChange={(e) => dispatch(changeInputName(e.target.value))}
+            />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

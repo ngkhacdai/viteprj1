@@ -43,13 +43,14 @@ const TableCategory = () => {
       key: "category_name",
     },
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (record) => {
         return (
           <Row gutter={[10, 10]}>
             <Col>
               <Button
+                className="w-20"
                 type="default"
                 onClick={() => {
                   showUpadteModal(
@@ -63,7 +64,11 @@ const TableCategory = () => {
               </Button>
             </Col>
             <Col>
-              <Button onClick={() => showDeleteModal(record._id)} danger>
+              <Button
+                className="w-20"
+                onClick={() => showDeleteModal(record._id)}
+                danger
+              >
                 Delete
               </Button>
             </Col>

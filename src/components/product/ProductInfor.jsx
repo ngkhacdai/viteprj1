@@ -1,12 +1,11 @@
-import { Button, Radio, Rate } from "antd/es";
+import { Col, Radio, Rate, Row } from "antd/es";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom/dist";
-import ProductDesc from "./ProductDesc";
 
 const ProductInfor = ({ product }) => {
   const [attribute, setAttribute] = useState("");
   const [options, setOptions] = useState("");
-
+  console.log(product);
   const onSelectAttributed = (e) => {
     setAttribute(e.target.value);
   };
@@ -15,7 +14,6 @@ const ProductInfor = ({ product }) => {
     setOptions(e.target.value);
   };
 
-  // Reset options when attribute changes
   useEffect(() => {
     setOptions("");
   }, [attribute]);
@@ -32,46 +30,82 @@ const ProductInfor = ({ product }) => {
           className="pb-2"
         />
       </p>
-      <div className="flex">
-        <p className="mr-2 pb-2">Tên shop:</p>
-        <NavLink>{product?.shop_name}</NavLink>
-      </div>
       <p className="text-red-500 text-xl pb-2">
         {product?.product_price.toLocaleString("en-US", {
           style: "currency",
           currency: "VND",
         })}
       </p>
-      <p>Sản phẩm tồn kho: {product.product_quantity}</p>
-      <div>
-        <p>Thuộc tính: </p>
-        <div className="mt-2 flex items-center">
-          <p className="mr-2">Màu sắc: </p>
-          <Radio.Group onChange={onSelectAttributed}>
-            {product.product_attributes.map((item, index) => (
-              <Radio.Button key={`attribute-${index}`} value={item}>
-                {item.color}
-              </Radio.Button>
-            ))}
-          </Radio.Group>
-        </div>
-        <div className="mt-2 flex items-center">
-          <p className="mr-2">Kích cỡ: </p>
-          <Radio.Group
-            className="my-2"
-            value={options}
-            onChange={onSelectOption}
+      <Row gutter={[10, 10]} justify={"start"} className="font-bold">
+        <Col xs={24} sm={6} md={6} lg={6} xl={6}>
+          Tên shop:
+        </Col>
+        <Col xs={24} sm={18} md={18} lg={18} xl={18}>
+          <NavLink
+            to={`/storedetail?${product.shop_name}&id=${product.shop_id}`}
           >
-            {attribute &&
-              attribute.options.map((item, index) => (
-                <Radio.Button key={`options-${index}`} value={item}>
-                  {item.size}
+            {product?.shop_name}
+          </NavLink>
+        </Col>
+      </Row>
+
+      <Row gutter={[10, 10]}>
+        <Col xs={24} sm={6} md={6} lg={6} xl={6}>
+          Sản phẩm tồn kho:
+        </Col>
+        <Col xs={24} sm={18} md={18} lg={18} xl={18}>
+          {product.product_quantity}
+        </Col>
+      </Row>
+      <div>
+        <Row gutter={[10, 10]} className="mt-2 flex items-center">
+          <Col xs={24} sm={24} md={6} lg={6} xl={6}>
+            Màu sắc:{" "}
+          </Col>
+          <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+            <Radio.Group onChange={onSelectAttributed}>
+              {product.product_attributes.map((item, index) => (
+                <Radio.Button key={`attribute-${index}`} value={item}>
+                  {item.color}
                 </Radio.Button>
               ))}
-          </Radio.Group>
-        </div>
-        <div>Số lượng hàng còn lại: {options && options.options_quantity}</div>
-        <ProductDesc product={product} />
+            </Radio.Group>
+          </Col>
+        </Row>
+        <Row gutter={[10, 10]} className="mt-2 flex items-center">
+          <Col xs={24} sm={24} md={6} lg={6} xl={6}>
+            Kích cỡ:
+          </Col>
+          <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+            <Radio.Group value={options} onChange={onSelectOption}>
+              {attribute &&
+                attribute.options.map((item, index) => (
+                  <Radio.Button key={`options-${index}`} value={item}>
+                    {item.size}
+                  </Radio.Button>
+                ))}
+            </Radio.Group>
+          </Col>
+          <Col span={24}>
+            Số lượng hàng còn lại: {options && options.options_quantity}
+          </Col>
+        </Row>
+        <Row gutter={[10, 10]} className="mt-2">
+          <Col xs={24} sm={24} md={6} lg={6} xl={6}>
+            Mô tả sản phẩm:
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={18}
+            lg={18}
+            xl={18}
+            className="whitespace-pre-wrap	"
+            span={18}
+          >
+            {product.product_description}
+          </Col>
+        </Row>
       </div>
     </div>
   );

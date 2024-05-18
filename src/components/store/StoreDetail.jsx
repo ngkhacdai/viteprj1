@@ -92,7 +92,6 @@ const StoreDetail = () => {
         >
           <div className="demo-logo" />
           <Menu
-            theme="white"
             mode="horizontal"
             defaultSelectedKeys={["1"]}
             items={items}

@@ -137,7 +137,7 @@ const OrderDetail = () => {
                       ? "bg-green-500"
                       : order.order_status === "delivered"
                       ? "bg-green-500"
-                      : order.order_status === "canceled"
+                      : order.order_status === "cancelled"
                       ? "bg-red-500"
                       : order.order_status === "shipped" && "bg-green-500"
                   }

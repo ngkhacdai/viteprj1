@@ -72,12 +72,12 @@ const CustomerDetail = () => {
         >
           <div className="demo-logo" />
           <Menu
-            theme="white"
             mode="horizontal"
             defaultSelectedKeys={["1"]}
             items={items}
             onClick={handleMenuClick}
             style={{
+              color: "black",
               flex: 1,
               minWidth: 0,
               backgroundColor: "white",
