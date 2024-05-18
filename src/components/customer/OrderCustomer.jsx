@@ -1,7 +1,8 @@
-import { Table } from "antd/es";
 import { Button } from "@mui/material";
+import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
-const TableOrder = ({ orderData }) => {
+
+const OrderCustomer = ({ order }) => {
   const navigate = useNavigate();
   const columns = [
     {
@@ -52,23 +53,7 @@ const TableOrder = ({ orderData }) => {
     {
       title: "Trạng thái",
       render: (record) => {
-        return (
-          <div
-            className={
-              record.order_status === "pending"
-                ? "text-yellow-600"
-                : record.order_status === "comfirmed"
-                ? "text-green-600"
-                : record.order_status === "delivered"
-                ? "text-green-600"
-                : record.order_status === "cancelled"
-                ? "text-red-600"
-                : record.order_status === "shipped" && "text-green-600"
-            }
-          >
-            {checkStatus(record.order_status)}
-          </div>
-        );
+        return <div>{checkStatus(record.order_status)}</div>;
       },
     },
     {
@@ -106,9 +91,9 @@ const TableOrder = ({ orderData }) => {
   };
   return (
     <div>
-      <Table columns={columns} scroll={{ x: 800 }} dataSource={orderData} />
+      <Table columns={columns} scroll={{ x: 500 }} dataSource={order} />
     </div>
   );
 };
 
-export default TableOrder;
+export default OrderCustomer;

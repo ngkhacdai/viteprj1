@@ -30,12 +30,12 @@ const Statical = () => {
     return <div>Something went wrong</div>;
   }
   return (
-    <>
+    <div>
       <div className="w-full">
         <HeaderStatical />
       </div>
       <ContentStatical />
-    </>
+    </div>
   );
 };
 

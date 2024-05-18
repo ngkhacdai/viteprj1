@@ -1,6 +1,4 @@
-// import React from 'react';
-
-import { Image, Table, Button, Flex } from "antd";
+import { Image, Table, Button, Row, Col } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { API } from "../../service/customAxios";
 import {
@@ -49,23 +47,27 @@ const TableCategory = () => {
       key: "action",
       render: (record) => {
         return (
-          <Flex>
-            <Button
-              type="default"
-              onClick={() => {
-                showUpadteModal(
-                  record._id,
-                  record.category_name,
-                  record.category_thumb
-                );
-              }}
-            >
-              Update
-            </Button>
-            <Button onClick={() => showDeleteModal(record._id)} danger>
-              Delete
-            </Button>
-          </Flex>
+          <Row gutter={[10, 10]}>
+            <Col>
+              <Button
+                type="default"
+                onClick={() => {
+                  showUpadteModal(
+                    record._id,
+                    record.category_name,
+                    record.category_thumb
+                  );
+                }}
+              >
+                Update
+              </Button>
+            </Col>
+            <Col>
+              <Button onClick={() => showDeleteModal(record._id)} danger>
+                Delete
+              </Button>
+            </Col>
+          </Row>
         );
       },
     },

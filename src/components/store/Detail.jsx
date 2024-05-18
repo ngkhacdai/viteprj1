@@ -14,7 +14,7 @@ const Detail = ({ store }) => {
     <Row>
       <Col xs={24} sm={12} md={12} lg={12} xl={12} className="">
         <img
-          className="rounded-full border-inherit border-2 block mx-auto "
+          className="rounded-full border-inherit border-2 block mx-auto max-h-[30rem]"
           src={`${API}/${store.storeDetail.avatarShop}`}
         />
       </Col>
@@ -36,7 +36,7 @@ const Detail = ({ store }) => {
             <SiGmail />
           </Col>
           <Col className="p-2">Email cửa hàng: </Col>
-          <Col>{store.shop.email}</Col>
+          <Col>{store.shop?.email}</Col>
         </Row>
         <Row className="flex items-center">
           <Col>

@@ -1,9 +1,10 @@
 import { Table } from "antd/es";
 import { API } from "../../service/customAxios";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const TableCustomer = ({ customerData }) => {
-  console.log(customerData);
+  const navigate = useNavigate();
   const columns = [
     {
       title: "STT",
@@ -54,13 +55,21 @@ const TableCustomer = ({ customerData }) => {
       title: "Hành động",
       render: (record) => {
         return (
-          <Button variant="contained" color="success" size="small">
+          <Button
+            onClick={() => viewDetailHandle(record)}
+            variant="contained"
+            color="success"
+            size="small"
+          >
             Xem chi tiết
           </Button>
         );
       },
     },
   ];
+  const viewDetailHandle = (record) => {
+    navigate(`/customerdetail?${record.information.fullName}&id=${record._id}`);
+  };
   return (
     <div>
       <Table columns={columns} scroll={{ x: 500 }} dataSource={customerData} />

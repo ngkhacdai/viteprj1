@@ -35,12 +35,14 @@ const Category = () => {
   return (
     <div>
       <div>
-        <Button
-          onClick={() => dispatch(showModal({ titleModal: "Thêm danh mục" }))}
-          type="primary"
-        >
-          Thêm danh mục
-        </Button>
+        <div className="flex justify-end p-2">
+          <Button
+            onClick={() => dispatch(showModal({ titleModal: "Thêm danh mục" }))}
+            type="primary"
+          >
+            Thêm danh mục
+          </Button>
+        </div>
         <ModalCategory />
         <ModalDelete />
       </div>

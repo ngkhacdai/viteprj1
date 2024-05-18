@@ -13,9 +13,9 @@ const HeaderStatical = () => {
   return (
     <div>
       <div>
-        <h3 className="title">Tổng quan</h3>
+        <h3 className="title mb-2">Tổng quan</h3>
       </div>
-      <Row justify="start" gutter={[10, 24]}>
+      <Row justify="start" gutter={[10, 0]}>
         <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={4}>
           <div>
             <Card

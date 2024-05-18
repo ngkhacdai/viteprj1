@@ -1,30 +1,24 @@
 import { useEffect, useState } from "react";
-import { getShopDetail, statisticalShop } from "../../service/ShopAPI";
-import { Spin } from "antd";
-import { useLocation, useNavigate } from "react-router-dom";
 import { Layout, Menu, theme } from "antd";
 import { IoMdArrowBack } from "react-icons/io";
-import Detail from "./Detail";
-import Revenue from "./Revenue";
-import Order from "./Order";
-import TopProduct from "./TopProduct";
+import { Spin } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getUser } from "../../service/userAPI";
+import OrderCustomer from "./OrderCustomer";
+import CustomerInfor from "./CustomerInfor";
 const { Header, Content } = Layout;
 
-const StoreDetail = () => {
+const CustomerDetail = () => {
   const navigate = useNavigate();
-  const [store, setStore] = useState([]);
+  const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedKey, setSelectedKey] = useState("1");
-  const [detail, setDetail] = useState([]);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const goBack = () => {
-    navigate(-1);
-  };
+  console.log(userData);
   const getData = async () => {
     try {
-      setStore(await getShopDetail(queryParams.get("id")));
-      setDetail(await statisticalShop(queryParams.get("id")));
+      setUserData(await getUser(queryParams.get("id")));
       setIsLoading(false);
     } catch (error) {
       goBack();
@@ -33,53 +27,39 @@ const StoreDetail = () => {
   useEffect(() => {
     getData();
   }, []);
-
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
   const handleMenuClick = (e) => {
     setSelectedKey(e.key);
   };
-
+  const goBack = () => {
+    navigate(-1);
+  };
   const items = [
     {
       key: "1",
-      label: "Chi tiết cửa hàng",
+      label: "Chi tiết khách hàng",
     },
     {
       key: "2",
-      label: "Doanh thu",
-    },
-    {
-      key: "3",
-      label: "Đơn hàng",
-    },
-    {
-      key: "4",
-      label: "Danh sách sản phẩm bán chạy",
+      label: "Đơn hàng đã đặt",
     },
   ];
 
   const renderContent = () => {
     switch (selectedKey) {
       case "1":
-        return <Detail store={store} />;
+        return <CustomerInfor user={userData.user} />;
       case "2":
-        return <Revenue detail={detail} />;
-      case "3":
-        return <Order detail={detail} />;
-      case "4":
-        return <TopProduct detail={detail} />;
+        return <OrderCustomer order={userData.order} />;
       default:
-        return <Detail store={store} />;
+        return <div></div>;
     }
   };
-
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
   if (isLoading) {
     return <Spin fullscreen />;
   }
-
   return (
     <div>
       <Layout>
@@ -125,4 +105,4 @@ const StoreDetail = () => {
   );
 };
 
-export default StoreDetail;
+export default CustomerDetail;

@@ -83,8 +83,8 @@ const BarcharStatical = () => {
             <div>
               <Chart
                 chartType="ColumnChart"
-                height="500px"
                 data={chartData}
+                height={400}
                 loader={<div>Loading Chart...</div>}
               />
             </div>

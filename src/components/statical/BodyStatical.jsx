@@ -38,7 +38,7 @@ const BodyStatical = () => {
     <div>
       <h3>Top bán chạy</h3>
       <Table
-        className="table-statical"
+        className="table-statical mt-2"
         dataSource={data.topProductSold}
         columns={columns}
         style={{

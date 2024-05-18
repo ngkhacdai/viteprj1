@@ -1,7 +1,10 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Order = ({ detail }) => {
   const order = detail.orderShop;
+  const navigate = useNavigate();
   const columns = [
     {
       title: "STT",
@@ -38,7 +41,14 @@ const Order = ({ detail }) => {
     {
       title: "Tổng tiền",
       render: (record) => {
-        return <p>{record.order_checkout?.totalCheckout}</p>;
+        return (
+          <p>
+            {record.order_checkout?.totalCheckout.toLocaleString("en-US", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </p>
+        );
       },
     },
     {
@@ -51,13 +61,21 @@ const Order = ({ detail }) => {
       title: "Hành động",
       render: (record) => {
         return (
-          <Button variant="contained" color="success" size="small">
+          <Button
+            onClick={() => viewDetailHandle(record)}
+            variant="contained"
+            color="success"
+            size="small"
+          >
             Xem chi tiết
           </Button>
         );
       },
     },
   ];
+  const viewDetailHandle = (record) => {
+    navigate(`/orderdetail?id=${record._id}`);
+  };
   const checkStatus = (status) => {
     switch (status) {
       case "pending":

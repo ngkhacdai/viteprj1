@@ -62,9 +62,9 @@ const OrderChart = () => {
         <Chart
           chartType="LineChart"
           width="100%"
-          height="400px"
           data={chartData}
           options={options}
+          height={421}
           loader={<div>Loading Chart...</div>}
         />
       ) : (
