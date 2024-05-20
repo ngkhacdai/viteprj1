@@ -24,9 +24,8 @@ const LoginForm = () => {
       toast.error("Sai tài khoản hoặc mật khẩu");
     }
   };
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = () => {
     toast.error("Hãy nhập đầy đủ các trường");
-    console.log("Failed:", errorInfo);
   };
   return (
     <>

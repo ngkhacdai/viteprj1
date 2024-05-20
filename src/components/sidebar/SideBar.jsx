@@ -154,7 +154,7 @@ const SideBar = () => {
                 placement="bottomRight"
                 arrow
               >
-                <p>Admin</p>
+                <p className="cursor-pointer">Admin</p>
               </Dropdown>
             </div>
           </div>

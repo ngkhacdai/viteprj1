@@ -17,7 +17,6 @@ const ModalDelete = () => {
   };
   const handleOk = async () => {
     const form = { id_category };
-    console.log(form);
     await dispatch(fetchDeleteCategory(form));
     await dispatch(fetchGetAllCategory());
     handleCancel();

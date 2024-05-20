@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom/dist";
 const ProductInfor = ({ product }) => {
   const [attribute, setAttribute] = useState("");
   const [options, setOptions] = useState("");
-  console.log(product);
   const onSelectAttributed = (e) => {
     setAttribute(e.target.value);
   };
@@ -86,8 +85,13 @@ const ProductInfor = ({ product }) => {
                 ))}
             </Radio.Group>
           </Col>
-          <Col span={24}>
-            Số lượng hàng còn lại: {options && options.options_quantity}
+        </Row>
+        <Row gutter={[10, 10]} className="mt-2 flex items-center">
+          <Col xs={24} sm={24} md={6} lg={6} xl={6}>
+            Số lượng hàng còn lại:
+          </Col>
+          <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+            {options && options.options_quantity}
           </Col>
         </Row>
         <Row gutter={[10, 10]} className="mt-2">

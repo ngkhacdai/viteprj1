@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import { Table } from "antd/es";
 
 const TableDiscount = ({ discountData }) => {
-  console.log(discountData);
   const columns = [
     {
       title: "STT",

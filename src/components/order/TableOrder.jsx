@@ -41,10 +41,13 @@ const TableOrder = ({ orderData }) => {
       render: (record) => {
         return (
           <p>
-            {record.order_checkout?.totalCheckout.toLocaleString("en-US", {
-              style: "currency",
-              currency: "VND",
-            })}
+            {(record.order_checkout?.totalCheckout + 30000).toLocaleString(
+              "en-US",
+              {
+                style: "currency",
+                currency: "VND",
+              }
+            )}
           </p>
         );
       },

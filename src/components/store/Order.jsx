@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -43,10 +43,13 @@ const Order = ({ detail }) => {
       render: (record) => {
         return (
           <p>
-            {record.order_checkout?.totalCheckout.toLocaleString("en-US", {
-              style: "currency",
-              currency: "VND",
-            })}
+            {(record.order_checkout?.totalCheckout + 30000).toLocaleString(
+              "en-US",
+              {
+                style: "currency",
+                currency: "VND",
+              }
+            )}
           </p>
         );
       },
@@ -54,7 +57,23 @@ const Order = ({ detail }) => {
     {
       title: "Trạng thái",
       render: (record) => {
-        return <div>{checkStatus(record.order_status)}</div>;
+        return (
+          <Tag
+            color={
+              record.order_status === "pending"
+                ? "#FFD700"
+                : record.order_status === "comfirmed"
+                ? "#87d068"
+                : record.order_status === "delivered"
+                ? "#87d068"
+                : record.order_status === "cancelled"
+                ? "#f50"
+                : record.order_status === "shipped" && "#87d068"
+            }
+          >
+            {checkStatus(record.order_status)}
+          </Tag>
+        );
       },
     },
     {

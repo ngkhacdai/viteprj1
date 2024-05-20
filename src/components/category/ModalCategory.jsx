@@ -109,15 +109,11 @@ const ModalCategory = () => {
         formData.append("id_category", id_category);
         await updateCategory(formData);
       } else {
-        console.log("fileList", fileList[0]);
         await fetch(fileList[0].url)
           .then((res) => {
             return res.blob();
           })
           .then((blob) => {
-            console.log(
-              new File([blob], "Filename.png", { type: "image/png" })
-            );
             formData.append(
               "thumb",
               new File([blob], "Filename.png", { type: "image/png" })

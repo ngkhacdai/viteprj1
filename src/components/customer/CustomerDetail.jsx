@@ -15,7 +15,6 @@ const CustomerDetail = () => {
   const [selectedKey, setSelectedKey] = useState("1");
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  console.log(userData);
   const getData = async () => {
     try {
       setUserData(await getUser(queryParams.get("id")));

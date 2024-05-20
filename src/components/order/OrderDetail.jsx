@@ -12,7 +12,6 @@ const OrderDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  console.log(order);
   const getData = async () => {
     try {
       setOrder(await getOrderDetail(queryParams.get("id")));
