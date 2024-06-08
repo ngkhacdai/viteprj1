@@ -1,7 +1,11 @@
 import "../../css/sidebar/sidebar.css";
 import { useEffect, useState } from "react";
 import { Button, Dropdown, Layout, Menu, theme } from "antd";
-import { HomeOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
 import {
   NavLink,
   Outlet,
@@ -13,14 +17,14 @@ import {
   MdDiscount,
   MdOutlineProductionQuantityLimits,
 } from "react-icons/md";
-import { FaRegMoneyBillAlt, FaStore } from "react-icons/fa";
-import { IoPeopleCircleOutline } from "react-icons/io5";
-import avatar from "../../assets/avatar.jpg";
+import { FaStore } from "react-icons/fa";
+import logo from "../../assets/trustybuy.png";
 
 const { Header, Sider, Content } = Layout;
 
 const SideBar = () => {
-  const [collap, setCollap] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
+  const [pathName, setPathName] = useState("");
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -28,7 +32,7 @@ const SideBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    // Update the title based on the current pathname
+    setPathName(location.pathname);
     switch (location.pathname) {
       case "/statical":
         setTitle("Thống kê");
@@ -87,63 +91,77 @@ const SideBar = () => {
     <Layout>
       <Sider
         collapsible
-        collapsed={collap}
-        onCollapse={(value) => setCollap(value)}
-        className="top-0 left-0 h-screen z-10"
-        style={{ position: "sticky" }}
+        collapsed={collapsed}
+        trigger={null}
+        onCollapse={(value) => setCollapsed(value)}
+        className="top-0 left-0 h-screen z-10 sm:block hidden"
+        style={{ position: "sticky", backgroundColor: "white" }}
       >
-        <div className="demo-logo-vertical" />
+        <div className="demo-logo-vertical">
+          <img src={logo} alt="" />,
+        </div>
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[pathName]}
           items={[
             {
-              key: "1",
+              key: "/",
               icon: <HomeOutlined />,
-              label: <NavLink to={"/"}>Home</NavLink>,
+              label: <NavLink to={"/"}>Trang chủ</NavLink>,
             },
             {
-              key: "2",
+              key: "/category",
               icon: <MdCategory />,
-              label: <NavLink to={"/category"}>Category</NavLink>,
+              label: <NavLink to={"/category"}>Danh mục</NavLink>,
             },
             {
-              key: "3",
+              key: "/product",
               icon: <MdOutlineProductionQuantityLimits />,
-              label: <NavLink to={"/product"}>Product</NavLink>,
+              label: <NavLink to={"/product"}>Sản phẩm</NavLink>,
             },
             {
-              key: "4",
+              key: "/store",
               icon: <FaStore />,
-              label: <NavLink to={"/store"}>Store</NavLink>,
+              label: <NavLink to={"/store"}>Cửa hàng</NavLink>,
             },
+            // {
+            //   key: "/customer",
+            //   icon: <IoPeopleCircleOutline />,
+            //   label: <NavLink to={"/customer"}>Customer</NavLink>,
+            // },
             {
-              key: "5",
-              icon: <IoPeopleCircleOutline />,
-              label: <NavLink to={"/customer"}>Customer</NavLink>,
-            },
-            {
-              key: "6",
+              key: "/discount",
               icon: <MdDiscount />,
-              label: <NavLink to={"/discount"}>Discount</NavLink>,
+              label: <NavLink to={"/discount"}>Giảm giá</NavLink>,
             },
-            {
-              key: "7",
-              icon: <FaRegMoneyBillAlt />,
-              label: <NavLink to={"/order"}>Order</NavLink>,
-            },
+            // {
+            //   key: "/order",
+            //   icon: <FaRegMoneyBillAlt />,
+            //   label: <NavLink to={"/order"}>Order</NavLink>,
+            // },
           ]}
         />
       </Sider>
       <Layout>
         <Header
+          className="sticky top-0 bg-white z-10"
           style={{
             padding: 0,
             background: colorBgContainer,
           }}
         >
-          <div className="header-container">
+          <div className="header-container p-0">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
             <h3 className="text-xs font-bold sm:text-xl">{tiltle}</h3>
 
             <div className="infor-header">
@@ -159,6 +177,40 @@ const SideBar = () => {
             </div>
           </div>
         </Header>
+        <Menu
+          className={`sticky top-16 overflow-hidden bg-white w-full z-10 sm:hidden block transition duration-1000  ${
+            !collapsed ? "max-h-0" : "max-h-full"
+          }`}
+          items={[
+            {
+              key: "/",
+              icon: <HomeOutlined />,
+              label: <NavLink to={"/"}>Trang chủ</NavLink>,
+            },
+            {
+              key: "/category",
+              icon: <MdCategory />,
+              label: <NavLink to={"/category"}>Danh mục</NavLink>,
+            },
+            {
+              key: "/product",
+              icon: <MdOutlineProductionQuantityLimits />,
+              label: <NavLink to={"/product"}>Sản phẩm</NavLink>,
+            },
+            {
+              key: "/store",
+              icon: <FaStore />,
+              label: <NavLink to={"/store"}>Cửa hàng</NavLink>,
+            },
+            {
+              key: "/discount",
+              icon: <MdDiscount />,
+              label: <NavLink to={"/discount"}>Giảm giá</NavLink>,
+            },
+          ]}
+          mode="inline"
+        />
+
         <Content
           style={{
             // minHeight: "100vh",

@@ -1,6 +1,6 @@
 import { API } from "../../service/customAxios";
 import { Button } from "@mui/material";
-import { Table } from "antd/es";
+import { Table, Tag } from "antd/es";
 import { useNavigate } from "react-router-dom";
 
 const TableProduct = ({ product }) => {
@@ -23,7 +23,9 @@ const TableProduct = ({ product }) => {
     },
     {
       title: "Tên sản phẩm",
-      dataIndex: "product_name",
+      render: (record) => {
+        return <p className="line-clamp-1">{record.product_name}</p>;
+      },
     },
     {
       title: "Giá sản phẩm",
@@ -44,7 +46,18 @@ const TableProduct = ({ product }) => {
     {
       title: "Trạng thái",
       render: (record) => (
-        <div>{record.isPublished ? <p>Hiển thị</p> : <p>Ẩn</p>}</div>
+        <div>
+          {record.isPublished ? (
+            <Tag
+              color="#87d068
+"
+            >
+              Hiển thị
+            </Tag>
+          ) : (
+            <Tag color="#f50">Ẩn</Tag>
+          )}
+        </div>
       ),
     },
     {

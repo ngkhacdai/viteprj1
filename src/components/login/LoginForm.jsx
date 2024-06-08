@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchLogin } from "../../redux/slice/AccessSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import logo from "../../assets/trustybuy.png";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.access.isLogin);
@@ -28,17 +28,16 @@ const LoginForm = () => {
     toast.error("Hãy nhập đầy đủ các trường");
   };
   return (
-    <>
+    <div className="md:w-1/3 w-5/6 md:bg-none bg-white opacity-95 md:opacity-85 h-2/3 border-inherit border-2 rounded-xl shadow-lg flex flex-col justify-center items-center ">
+      <img className="w-1/4" src={logo} alt="" />
+      <p className="text-2xl font-bold text-center">Đăng nhập</p>
       <Form
         name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
+        layout="vertical"
         style={{
-          maxWidth: 600,
+          width: "80%",
+          opacity: 100,
+          color: "white",
         }}
         initialValues={{
           remember: true,
@@ -48,39 +47,38 @@ const LoginForm = () => {
         autoComplete="off"
       >
         <Form.Item
-          label="Emal"
+          label={<p className="">Tài khoản</p>}
           name="email"
           rules={[
             {
               required: true,
-              message: "Please input your email!",
+              message: "Hãy nhập email!",
             },
           ]}
         >
-          <Input />
+          <Input placeholder="Email" />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label={<p className="">Mật khẩu</p>}
           name="password"
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+              message: "Hãy nhập mật khẩu!",
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password placeholder="Mật khẩu" />
         </Form.Item>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            Submit
+        <Form.Item>
+          <Button
+            className="w-full rounded-full font-bold"
+            type="primary"
+            htmlType="submit"
+          >
+            Đăng nhập
           </Button>
         </Form.Item>
       </Form>
@@ -97,7 +95,7 @@ const LoginForm = () => {
         theme="light"
       />
       <ToastContainer />
-    </>
+    </div>
   );
 };
 

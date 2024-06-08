@@ -11,12 +11,12 @@ const OrderChart = () => {
       const months = Array.from({ length: 12 }, (_, i) => i + 1);
       const mergedData = [
         [
-          "Month",
-          "Cancelled Orders",
-          "Confirmed Orders",
-          "Delivered Orders",
-          "Pending Orders",
-          "Shipped Orders",
+          "Tháng",
+          "Đơn hàng bị hủy",
+          "Đơn hàng đã xác nhận",
+          "Đơn hàng đã giao",
+          "Đơn hàng chờ xác nhận",
+          "Đơn hàng đang giao",
         ],
       ];
       months.forEach((month) => {
@@ -58,6 +58,7 @@ const OrderChart = () => {
 
   return (
     <div>
+      <p className="text-lg font-bold">Thống kê đơn hàng</p>
       {chartData ? (
         <Chart
           chartType="LineChart"

@@ -6,7 +6,7 @@ const BarcharStatical = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const data = useSelector((state) => state.statical.data);
   const [chartData, setChartData] = useState(null);
-
+  console.log(data);
   useEffect(() => {
     if (data && data.mergedData) {
       const dataArray = [];
@@ -41,13 +41,13 @@ const BarcharStatical = () => {
       }
       const dataWithHeader = [
         [
-          "Year",
-          "Category Count",
-          "Discount Count",
-          "Order Count",
-          "Product Count",
-          "Shop Count",
-          "User Count",
+          "Năm",
+          "Số lượng danh mục",
+          "Số lượng mã giảm giá",
+          "Số lượng đơn hàng",
+          "Số lượng sản phẩm",
+          "Số lượng cửa hàng",
+          "Số lượng người dùng",
         ],
         ...dataArray,
       ];
@@ -63,6 +63,7 @@ const BarcharStatical = () => {
 
   return (
     <>
+      <p className="text-lg font-bold">Thống kê tổng quan qua các năm</p>
       {chartData ? (
         <>
           <div className="barcharStatical">

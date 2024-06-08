@@ -20,13 +20,18 @@ const BodyStatical = () => {
     },
     {
       title: "Tên",
-      dataIndex: "product_name",
+      render: (record) => {
+        return <p className="line-clamp-1">{record.product_name}</p>;
+      },
       key: "product_name",
     },
     {
       title: "Giá",
-      dataIndex: "product_price",
-      key: "product_price",
+      render: (record) =>
+        record.product_price.toLocaleString("en-US", {
+          style: "currency",
+          currency: "VND",
+        }),
     },
     {
       title: "Đã bán",
@@ -36,7 +41,7 @@ const BodyStatical = () => {
   ];
   return (
     <div>
-      <h3>Top bán chạy</h3>
+      <h3 className="text-lg font-bold">Top 5 sản phẩm bán chạy</h3>
       <Table
         className="table-statical mt-2"
         dataSource={data.topProductSold}

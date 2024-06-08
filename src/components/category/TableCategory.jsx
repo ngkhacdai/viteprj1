@@ -18,11 +18,6 @@ const TableCategory = () => {
       key: "stt",
     },
     {
-      title: "ID",
-      dataIndex: "_id",
-      key: "_id",
-    },
-    {
       title: "Ảnh",
       dataIndex: "category_thumb",
       key: "category_thumb",
@@ -51,7 +46,7 @@ const TableCategory = () => {
             <Col>
               <Button
                 className="w-20"
-                type="default"
+                type="primary"
                 onClick={() => {
                   showUpadteModal(
                     record._id,
@@ -66,6 +61,7 @@ const TableCategory = () => {
             <Col>
               <Button
                 className="w-20"
+                type="primary"
                 onClick={() => showDeleteModal(record._id)}
                 danger
               >

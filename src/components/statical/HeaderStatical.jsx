@@ -13,7 +13,7 @@ const HeaderStatical = () => {
   return (
     <div>
       <div>
-        <h3 className="title mb-2">Tổng quan</h3>
+        <h3 className="text-lg font-bold mb-2">Tổng quan</h3>
       </div>
       <Row justify="start" gutter={[10, 0]}>
         <Col className="gutter-row" xs={24} sm={12} md={8} lg={6} xl={4}>
@@ -25,7 +25,7 @@ const HeaderStatical = () => {
             >
               <Meta
                 avatar={<Avatar src={category} />}
-                title="Category"
+                title="Danh mục"
                 description={data.countCategory}
               />
             </Card>
@@ -40,7 +40,7 @@ const HeaderStatical = () => {
             >
               <Meta
                 avatar={<Avatar src={discount} />}
-                title="Discount"
+                title="Giảm giá"
                 description={data.countDiscount}
               />
             </Card>
@@ -55,7 +55,7 @@ const HeaderStatical = () => {
             >
               <Meta
                 avatar={<Avatar src={order} />}
-                title="Order"
+                title="Đơn hàng"
                 description={data.countOrders}
               />
             </Card>
@@ -70,7 +70,7 @@ const HeaderStatical = () => {
             >
               <Meta
                 avatar={<Avatar src={product} />}
-                title="Product"
+                title="Sản phẩm"
                 description={data.countProducts}
               />
             </Card>
@@ -85,7 +85,7 @@ const HeaderStatical = () => {
             >
               <Meta
                 avatar={<Avatar src={shop} />}
-                title="Shop"
+                title="Cửa hàng"
                 description={data.countShops}
               />
             </Card>
@@ -100,7 +100,7 @@ const HeaderStatical = () => {
             >
               <Meta
                 avatar={<Avatar src={user} />}
-                title="User"
+                title="Người dùng"
                 description={data.countUsers}
               />
             </Card>

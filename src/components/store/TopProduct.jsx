@@ -24,8 +24,12 @@ const TopProduct = ({ detail }) => {
     },
     {
       title: "Giá",
-      dataIndex: "product_price",
       key: "product_price",
+      render: (record) =>
+        record.product_price.toLocaleString("en-US", {
+          style: "currency",
+          currency: "VND",
+        }),
     },
     {
       title: "Đã bán",
@@ -39,6 +43,7 @@ const TopProduct = ({ detail }) => {
         className="table-statical"
         dataSource={topProductSold}
         columns={columns}
+        scroll={{ x: 600 }}
         style={{
           width: "100%",
         }}
