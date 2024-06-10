@@ -12,7 +12,7 @@ const ProductSlide = ({ product }) => {
             return (
               <SwiperSlide key={`slide-${index}`}>
                 <img
-                  className="min-h-[30rem] h-[30rem] w-full"
+                  className="min-h-[30rem] h-[35rem] w-full"
                   src={`${API}/uploads/${item}`}
                 />
               </SwiperSlide>

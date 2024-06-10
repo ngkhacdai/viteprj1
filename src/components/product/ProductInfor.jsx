@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom/dist";
 const ProductInfor = ({ product }) => {
   const [attribute, setAttribute] = useState("");
   const [options, setOptions] = useState("");
+
   const onSelectAttributed = (e) => {
     setAttribute(e.target.value);
   };
@@ -18,9 +19,9 @@ const ProductInfor = ({ product }) => {
   }, [attribute]);
 
   return (
-    <div className="p-2">
-      <p className="text-xl font-bold mb-2">Thông tin sản phẩm</p>
-      <h3 className="text-2xl pb-2">{product?.product_name}</h3>
+    <div className="p-4 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+      <p className="text-2xl font-bold mb-4">Thông tin sản phẩm</p>
+      <h3 className="text-3xl pb-2 font-semibold">{product?.product_name}</h3>
       <p>
         <Rate
           allowHalf
@@ -29,26 +30,27 @@ const ProductInfor = ({ product }) => {
           className="pb-2"
         />
       </p>
-      <p className="text-red-500 text-xl pb-2">
+      <p className="text-red-500 text-2xl pb-2 font-bold">
         {product?.product_price.toLocaleString("en-US", {
           style: "currency",
           currency: "VND",
         })}
       </p>
-      <Row gutter={[10, 10]} justify={"start"} className="font-bold">
+      <Row gutter={[10, 10]} justify={"start"} className="font-bold mb-2">
         <Col xs={24} sm={6} md={6} lg={6} xl={6}>
           Tên shop:
         </Col>
         <Col xs={24} sm={18} md={18} lg={18} xl={18}>
           <NavLink
-            to={`/storedetail?${product.shop_name}&id=${product.shop_id}`}
+            to={`/storedetail?shop_name=${product.shop_name}&id=${product.shop_id}`}
+            className="text-blue-500 font-semibold hover:underline"
           >
             {product?.shop_name}
           </NavLink>
         </Col>
       </Row>
 
-      <Row gutter={[10, 10]}>
+      <Row gutter={[10, 10]} className="mb-2">
         <Col xs={24} sm={6} md={6} lg={6} xl={6}>
           Sản phẩm tồn kho:
         </Col>
@@ -57,7 +59,7 @@ const ProductInfor = ({ product }) => {
         </Col>
       </Row>
       <div>
-        <Row gutter={[10, 10]} className="mt-2 flex items-center">
+        <Row gutter={[10, 10]} className="mt-2 flex items-center mb-2">
           <Col xs={24} sm={24} md={6} lg={6} xl={6}>
             Màu sắc:{" "}
           </Col>
@@ -71,7 +73,7 @@ const ProductInfor = ({ product }) => {
             </Radio.Group>
           </Col>
         </Row>
-        <Row gutter={[10, 10]} className="mt-2 flex items-center">
+        <Row gutter={[10, 10]} className="mt-2 flex items-center mb-2">
           <Col xs={24} sm={24} md={6} lg={6} xl={6}>
             Kích cỡ:
           </Col>
@@ -86,7 +88,7 @@ const ProductInfor = ({ product }) => {
             </Radio.Group>
           </Col>
         </Row>
-        <Row gutter={[10, 10]} className="mt-2 flex items-center">
+        <Row gutter={[10, 10]} className="mt-2 flex items-center mb-2">
           <Col xs={24} sm={24} md={6} lg={6} xl={6}>
             Số lượng hàng còn lại:
           </Col>
@@ -104,8 +106,7 @@ const ProductInfor = ({ product }) => {
             md={18}
             lg={18}
             xl={18}
-            className="whitespace-pre-wrap	"
-            span={18}
+            className="whitespace-pre-wrap"
           >
             {product.product_description}
           </Col>

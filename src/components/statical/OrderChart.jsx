@@ -1,76 +1,107 @@
-import { useState, useEffect } from "react";
-import Chart from "react-google-charts";
+import { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { useSelector } from "react-redux";
+
+// Register the necessary components
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const OrderChart = () => {
   const data = useSelector((state) => state.statical.data);
   const [chartData, setChartData] = useState(null);
 
-  useEffect(() => {
-    if (data.length !== 0) {
-      const months = Array.from({ length: 12 }, (_, i) => i + 1);
-      const mergedData = [
-        [
-          "Tháng",
-          "Đơn hàng bị hủy",
-          "Đơn hàng đã xác nhận",
-          "Đơn hàng đã giao",
-          "Đơn hàng chờ xác nhận",
-          "Đơn hàng đang giao",
-        ],
-      ];
-      months.forEach((month) => {
-        const cancelled =
-          data.orderCancelledByMonth.find((item) => item._id === month)
-            ?.totalOrders || 0;
-        const confirmed =
-          data.orderConfirmedByMonth.find((item) => item._id === month)
-            ?.totalOrders || 0;
-        const delivered =
-          data.orderDeliveredByMonth.find((item) => item._id === month)
-            ?.totalOrders || 0;
-        const pending =
-          data.orderPendingByMonth.find((item) => item._id === month)
-            ?.totalOrders || 0;
-        const shipped =
-          data.orderShippedByMonth.find((item) => item._id === month)
-            ?.totalOrders || 0;
+  const labels = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ];
 
-        mergedData.push([
-          month,
-          cancelled,
-          confirmed,
-          delivered,
-          pending,
-          shipped,
-        ]);
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      // title: {
+      //   display: true,
+      //   // text: "Chart.js Line Chart",
+      // },
+    },
+  };
+
+  useEffect(() => {
+    if (data && data.orderConfirmedByMonth && data.orderCancelledByMonth) {
+      setChartData({
+        labels,
+        datasets: [
+          {
+            label: "Đơn hàng xác nhận",
+            data: data.orderConfirmedByMonth.map((item) => item.totalOrders),
+            borderColor: "rgb(53, 162, 235)",
+            backgroundColor: "rgba(53, 162, 235, 0.5)",
+          },
+          {
+            label: "Đơn hàng đã hủy",
+            data: data.orderCancelledByMonth.map((item) => item.totalOrders),
+            borderColor: "rgb(255, 99, 132)",
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+          },
+          {
+            label: "Đơn hàng đã giao",
+            data: data.orderDeliveredByMonth.map((item) => item.totalOrders),
+            borderColor: "rgb(75, 192, 192)",
+            backgroundColor: "rgba(75, 192, 192, 0.5)",
+          },
+          {
+            label: "Đơn hàng đang chờ xác nhận",
+            data: data.orderPendingByMonth.map((item) => item.totalOrders),
+            borderColor: "rgb(255, 206, 86)",
+            backgroundColor: "rgba(255, 206, 86, 0.5)",
+          },
+          {
+            label: "Đơn hàng đang giao",
+            data: data.orderShippedByMonth.map((item) => item.totalOrders),
+            borderColor: "rgb(153, 102, 255)",
+            backgroundColor: "rgba(153, 102, 255, 0.5)",
+          },
+        ],
       });
-      setChartData(mergedData);
     }
   }, [data]);
 
-  const options = {
-    chart: {
-      title: "Order Statistics by Month",
-      subtitle: "Number of Orders",
-    },
-  };
+  if (!data) return <p>...Loading</p>;
+  if (!chartData) return null;
 
   return (
     <div>
       <p className="text-lg font-bold">Thống kê đơn hàng</p>
-      {chartData ? (
-        <Chart
-          chartType="LineChart"
-          width="100%"
-          data={chartData}
-          options={options}
-          height={421}
-          loader={<div>Loading Chart...</div>}
-        />
-      ) : (
-        <div>Loading Chart...</div>
-      )}
+      <Line className="mt-11" options={options} data={chartData} />
     </div>
   );
 };

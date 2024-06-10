@@ -30,7 +30,7 @@ const ProductDetail = () => {
   return (
     <div className="p-2">
       <Row gutter={[10, 10]}>
-        <Col xs={24} sm={24} md={12} lg={11} xl={10}>
+        <Col xs={24} sm={24} md={12} lg={12} xl={12}>
           <ProductSlide product={product} />
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={12}>

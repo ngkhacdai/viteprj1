@@ -103,7 +103,7 @@ const SideBar = () => {
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={[pathName]}
+          defaultSelectedKeys={[pathName ? pathName : "/"]}
           items={[
             {
               key: "/",

@@ -29,7 +29,7 @@ const ModalDelete = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Bạn có muốn xóa category này không?</p>
+        <p>Bạn có muốn xóa danh mục này không?</p>
       </Modal>
     </div>
   );
